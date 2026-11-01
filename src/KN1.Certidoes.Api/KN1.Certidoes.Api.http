@@ -1,0 +1,6 @@
+@KN1.Certidoes.Api_HostAddress = http://localhost:5204
+
+GET {{KN1.Certidoes.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

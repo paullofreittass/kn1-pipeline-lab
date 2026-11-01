@@ -1,0 +1,32 @@
+   name: CI
+
+   on:
+     push:
+       branches: [ main ]
+
+   env:
+     PROJETO: src/KN1.Certidoes.Api/KN1.Certidoes.Api.csproj
+
+   jobs:
+     build:
+       runs-on: ubuntu-latest
+       steps:
+       - uses: actions/checkout@v4
+
+       - uses: actions/setup-dotnet@v4
+         with:
+           dotnet-version: '8.0.x'
+
+       - name: Restore
+         run: dotnet restore $PROJETO
+
+       - name: Build
+         run: dotnet build $PROJETO -c Release --no-restore
+
+       - name: Publish
+         run: dotnet publish $PROJETO -c Release -o publish --no-build
+
+       - uses: actions/upload-artifact@v4
+         with:
+           name: certidoes-api
+           path: publish
